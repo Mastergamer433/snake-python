@@ -26,6 +26,13 @@ def main():
             elif event.type==pygame.KEYDOWN:
                 snake.dir=event.unicode
         WIN.fill((0,0,0))
+
+        snake.move()
+        pygame.draw.rect(WIN,(0,200,0),snake.head)
+        pygame.draw.rect(WIN,(200,0,0),apple.rect)
+        for peice in snake.peices:
+            peice.setRect()
+            pygame.draw.rect(WIN,(0,255,0),peice.rect)
         checkResult=snake.check(apple)
         if checkResult==1:
             time.sleep(0.5)
@@ -35,12 +42,7 @@ def main():
             print("Score:", snake.score)
         elif checkResult==2:
             snake.gameOver=True
-            done=True
-        snake.move()
-        pygame.draw.rect(WIN,(0,200,0),snake.head)
-        pygame.draw.rect(WIN,(200,0,0),apple.rect)
-        for peice in snake.peices:
-            pygame.draw.rect(WIN,(0,255,0),peice.rect)
+            done=True            
         pygame.display.flip()
         clock.tick(5)
     if snake.gameOver==True:
@@ -50,3 +52,4 @@ def main():
         pygame.quit
 if __name__ == "__main__":
     main()
+
